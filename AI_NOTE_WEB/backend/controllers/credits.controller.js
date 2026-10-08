@@ -25,8 +25,8 @@ export const createCreditsOrder = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       // payment_method_types line hata di gayi hai
-      success_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/payment-success`,
-      cancel_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/payment-failed`,
+      success_url: `${process.env.CLIENT_URL || "http://localhost:5173"}payment-success`,
+      cancel_url: `${process.env.CLIENT_URL || "http://localhost:5173"}payment-failed`,
       line_items: [
         {
           price_data: {
