@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import { useEffect } from "react";
 import { getCurrentUser } from "./services/api";
-export const serverUrl = "http://localhost:8000";
+export const serverUrl = "https://task-ai-note-server.onrender.com";
 import { useDispatch, useSelector } from "react-redux";
 import History from "./pages/History";
 import Notes from "./pages/Notes";
