@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider} from "firebase/auth"
 
+
+//  firebase all object key, id's
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
   authDomain: "authexamnotesai-bb3d9.firebaseapp.com",

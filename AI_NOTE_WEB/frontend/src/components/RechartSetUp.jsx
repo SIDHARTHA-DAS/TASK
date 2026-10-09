@@ -1,5 +1,8 @@
 import {Bar, BarChart, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts"
 
+
+
+// this the function to show the all charts in ui 
 const RechartSetUp = ({charts}) => {
   if(!charts || charts.length === 0) return null;
   const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ef4444", "#06b6d4"]
@@ -11,6 +14,8 @@ const RechartSetUp = ({charts}) => {
                 📊 {chart.title}
           </h4>
 
+
+            {/* bar chart logic */}
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
                   {chart.type === "bar" && (
@@ -25,7 +30,7 @@ const RechartSetUp = ({charts}) => {
                       </Bar>
                     </BarChart>
                   )}
-
+                    {/* line chart logic  */}
                   {chart.type === "line" && (
                     <LineChart data={chart.data}>
                           <XAxis dataKey="name"/>
@@ -38,6 +43,7 @@ const RechartSetUp = ({charts}) => {
                     </LineChart>
                   )}
 
+                    {/* pie charts logic */}
                   {chart.type === "pie" && (
                     <PieChart>
                       <Tooltip/>

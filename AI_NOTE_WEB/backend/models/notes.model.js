@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-
+// notes data model create
 const notesSchema = new mongoose.Schema({
      user: {
       type: mongoose.Schema.Types.ObjectId,

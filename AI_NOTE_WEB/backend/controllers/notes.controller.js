@@ -1,7 +1,7 @@
 import Notes from "../models/notes.model.js"
 
 
-
+// contrloer for all  note getting
 export const getMyNotes = async(req, res) => {
   try{
     const notes = await Notes.find({user : req.userId}).select("topic classLevel examType revisionMode includeDiagram includeChart createdAt").sort({createdAt: -1})
@@ -16,7 +16,7 @@ export const getMyNotes = async(req, res) => {
   }
 }
 
-
+// controller for single note getting
 export const getSingleNotes = async (req, res) => {
   try {
     const notes = await Notes.findOne({

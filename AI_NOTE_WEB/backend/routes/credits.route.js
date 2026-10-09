@@ -2,6 +2,8 @@ import express from "express"
 import isAuth from "../middleware/isAuth.js"
 import { createCreditsOrder } from "../controllers/credits.controller.js"
 
+
+// credits generate route
 const creditRouter = express.Router()
 
 

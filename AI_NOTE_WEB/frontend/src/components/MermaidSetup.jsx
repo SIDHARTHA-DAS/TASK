@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react"
 import mermaid from 'mermaid'
 
-
+// initialize mermaid for all charts 
 mermaid.initialize({
   startOnLoad: false,
   theme: "default"
 })
 
+
+//  function for show the diagram 
 const cleanMermaidChart = (diagram) =>{
   if (!diagram) return "";
 
@@ -22,7 +24,7 @@ const cleanMermaidChart = (diagram) =>{
     return clean;
 };
 
-
+// function for fix the all nodes in diagram 
 const autoFixNodes = (diagram) => {
   let index = 0;
   const used = new Map();
@@ -45,6 +47,8 @@ const autoFixNodes = (diagram) => {
   })
 }
 
+
+// function to show the diagram in ui perfectly
 const MermaidSetup = ({diagram}) => {
 
   const containerRef = useRef(null)

@@ -10,6 +10,8 @@ import FinalResult from "../components/FinalResult";
 
 const History = () => {
 
+
+  // all state are here for state management
   const { userData } = useSelector((state) => state.user);
   const credits = userData?.credits || 0;
   const navigate = useNavigate();
@@ -21,6 +23,8 @@ const History = () => {
   const [loading, setLoading] = useState(false);
 
 
+
+  // function for showing all the notes 
   useEffect(() => {
     const myNotes = async () => {
     try {
@@ -34,6 +38,9 @@ const History = () => {
   myNotes()
   }, [])
 
+
+
+    // function for showing indivual single note 
   const openNotes = async (noteId) => {
     setLoading(true)
     setActiveNoteId(noteId)
@@ -65,6 +72,7 @@ const History = () => {
           </p>
         </div>
 
+          {/* side bar open logic */}
         <div className="flex items-center gap-4 flex-wrap">
           {!isSidebarOpen && <button onClick={()=> setIsSidebarOpen(true)} className="lg:hidden text-white text-2xl cursor-pointer">
             <RxHamburgerMenu />
@@ -118,6 +126,8 @@ const History = () => {
                   <p className="text-sm text-gray-400">No notes created yet</p>
                 )}
 
+
+                  {/* all topic show logic */}
                 <ul className="space-y-3">
                     {topics.map((t,i)=> (
                       <li key={i} onClick={()=> {openNotes(t._id)}} className={`cursor-pointer rounded-xl p-3 border transition-all ${activeNoteId === t._id ? "bg-indigo-500/30 border-indigo-400 shadow-[0_0_1px_rgba(99,102,241,0.6)]" : "bg-white/5 border-white/10 hover:bg-white/10"}`}>
@@ -138,30 +148,10 @@ const History = () => {
                     ))}
                 </ul>
             </div>
-            {/* <div className="space-y-3">
-              {topics.length > 0 ? (
-                topics.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="p-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
-                  >
-                    <p className="font-medium truncate">{item.topic || "Untitled Note"}</p>
-                    {item.createdAt && <p className="text-gray-500 text-xs mt-1">
-                      {new Date(item.createdAt).toLocaleDateString()}
-                    </p>}
-                  </motion.div>
-                ))
-              ) : (
-                <div className="text-center py-10">
-                  <p className="text-gray-500 text-sm">No notes found.</p>
-                </div>
-              )}
-            </div> */}
+            
             </motion.div>}
         </AnimatePresence>
-
+                      {/* logic for loading and show notes */}
         <motion.div 
         initial={{opacity: 0, y: -15}}
       animate={{opacity: 1, y: 0}}

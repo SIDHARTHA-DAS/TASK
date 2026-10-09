@@ -6,11 +6,16 @@ import axios from "axios";
 import { serverUrl } from "../App";
 import { useDispatch } from "react-redux";
 
+
+
+// footer part
 const Footer = () => {
 
 
   const dispatch = useDispatch()
 
+
+  // function for logout
   const handleSignOut = async () => {
     try {
       await axios.get(serverUrl + "/api/auth/logout", {withCredentials: true})

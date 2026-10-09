@@ -3,7 +3,7 @@ import isAuth from "../middleware/isAuth.js"
 import { generateNotes } from "../controllers/generate.controller.js"
 import { getMyNotes, getSingleNotes } from "../controllers/notes.controller.js"
 
-
+// notes generate route
 const notesRouter = express.Router()
 
 

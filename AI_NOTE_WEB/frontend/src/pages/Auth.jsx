@@ -11,6 +11,8 @@ const Auth = () => {
 
   const dispatch = useDispatch()
 
+
+  // function for handle google firebase auth
   const handleGoogleAuth = async () =>{
       try {
         const response = await signInWithPopup(auth,provider)
@@ -25,6 +27,9 @@ const Auth = () => {
         console.log(error)
       }
   }
+
+
+  // login page 
   return (
     <div className="min-h-screen overflow-hidden bg-white text-black px-8">
       <motion.header
@@ -83,6 +88,8 @@ const Auth = () => {
 };
 
 
+
+// small feature function components for login page 
 function Feature({icon, title, des}){
   return(
     <motion.div

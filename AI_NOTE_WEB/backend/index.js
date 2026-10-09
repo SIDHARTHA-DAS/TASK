@@ -15,7 +15,7 @@ dotenv.config();
 
 const app = express();
 
-// Stripe Webhook ko express.json() se pehle define karna mandatory hai (Raw Body ke liye)
+// Stripe Webhook ko express.json() se pehle define karna mandatory hai 
 app.post(
   "/api/credits/webhook",
   express.raw({ type: "application/json" }),

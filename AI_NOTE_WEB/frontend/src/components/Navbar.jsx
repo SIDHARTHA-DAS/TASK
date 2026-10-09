@@ -8,6 +8,8 @@ import { setUserData } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+
+  // all state here for management state
   const { userData } = useSelector((state) => state.user);
   const credits = userData.credits;
   const [showCredits, setShowCredits] = useState(false);
@@ -15,6 +17,8 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+
+  // function for logout 
   const handleSignOut = async () => {
     try {
       await axios.get(serverUrl + "/api/auth/logout", {withCredentials: true})
@@ -112,6 +116,8 @@ const Navbar = () => {
   );
 };
 
+
+// a small component for menubutton for hsitory and logout .
 function MenuItem  ({onClick, text, red}) {
   return(
     <div 

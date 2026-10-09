@@ -6,10 +6,15 @@ const userSlice = createSlice({
   initialState:{
     userData:null
   },
+
+  //  create reducers function for setuser data 
   reducers:{
     setUserData:(state, action)=>{
       state.userData = action.payload
     },
+
+
+    //  create reducers function for update credits 
     updateCreadits:(state,action)=>{
       if(state.userData){
         state.userData.credits = action.payload

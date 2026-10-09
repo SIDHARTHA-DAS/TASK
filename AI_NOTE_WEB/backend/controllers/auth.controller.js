@@ -1,6 +1,9 @@
 import UserModel from "../models/user.model.js"
 import { getToken } from "../utils/token.js"
 
+
+
+// controller for googleauth setup 
 export const googleAuth = async (req, res) =>{
   try {
     const {name, email} = req.body 
@@ -26,6 +29,8 @@ export const googleAuth = async (req, res) =>{
   }
 }
 
+
+// controller for logout
 export const logOut = async (req, res) => {
   try {
     res.clearCookie("token")

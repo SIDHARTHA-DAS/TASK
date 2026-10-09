@@ -1,3 +1,86 @@
+export const buildPrompt = ({
+  topic,
+  classLevel,
+  examType,
+  revisionMode,
+  includeDiagram,
+  includeChart
+}) => {
+  return `
+  You are a STRICT JSON generator for an exam preparation system.
+
+  CRITICAL REQUIREMENTS:
+  - Respond WITH PURE VALID JSON ONLY.
+  - DO NOT wrap response in markdown (\`\`\`json).
+  - Use double quotes " for keys and string values.
+  - Properly escape quotes and newlines inside JSON strings (e.g. \\n).
+
+  TASK: 
+  Convert the given topic into exam-focused notes.
+
+  Topic: ${topic}
+  Class Level: ${classLevel || "Not specified"}
+  Exam Type: ${examType || "General"}
+  Revision Mode: ${revisionMode ? "ON" : "OFF"}
+  Include Diagram: ${includeDiagram ? "YES" : "NO"}
+  Include Charts: ${includeChart ? "YES" : "NO"}
+
+  GLOBAL CONTENT RULES:
+  - Clear, simple, exam-oriented language
+  - Markdown formatted inside "notes" field (headings and bullets)
+
+  REVISION MODE RULES:
+  - If REVISION MODE is ON:
+    - Notes must be VERY SHORT, bullet points, one-line answers, definitions, formulas.
+    - No paragraphs, no explanations.
+    - revisionPoints MUST summarize all key facts.
+  - If REVISION MODE is OFF:
+    - Detailed exam-focused notes. Max 2-4 lines per paragraph.
+
+  IMPORTANCE RULES:
+  - Divide sub-topics into THREE categories:
+    - "⭐": Very Important Topics
+    - "⭐⭐": Important Topics
+    - "⭐⭐⭐": Frequently Asked Topics
+
+  DIAGRAM RULES:
+  - If INCLUDE DIAGRAM is YES:
+    - diagram.data MUST be a valid Mermaid TD string starting with "graph TD". Wrap labels in square brackets.
+  - If INCLUDE DIAGRAM is NO:
+    - diagram.data MUST be ""
+
+  CHART RULES:
+  - If INCLUDE CHARTS is YES:
+    - charts array MUST contain at least one chart object with type ("bar", "line", or "pie"), title, and data array with objects having "name" and numeric "value".
+  - If INCLUDE CHARTS is NO:
+    - charts MUST be []
+
+  STRICT OUTPUT JSON STRUCTURE (Must match exactly):
+  {
+    "subTopics": {
+      "⭐": [],
+      "⭐⭐": [],
+      "⭐⭐⭐": []
+    },
+    "importance": "⭐",
+    "notes": "string content",
+    "revisionPoints": [],
+    "questions": {
+      "short": [],
+      "long": []
+    },
+    "diagram": {
+      "type": "flowchart",
+      "data": ""
+    },
+    "charts": []
+  }
+  `;
+};
+
+
+
+
 // export const buildPrompt = ({
 //   topic,
 //   classLevel,
@@ -126,82 +209,3 @@
 // }
 
 
-export const buildPrompt = ({
-  topic,
-  classLevel,
-  examType,
-  revisionMode,
-  includeDiagram,
-  includeChart
-}) => {
-  return `
-  You are a STRICT JSON generator for an exam preparation system.
-
-  CRITICAL REQUIREMENTS:
-  - Respond WITH PURE VALID JSON ONLY.
-  - DO NOT wrap response in markdown (\`\`\`json).
-  - Use double quotes " for keys and string values.
-  - Properly escape quotes and newlines inside JSON strings (e.g. \\n).
-
-  TASK: 
-  Convert the given topic into exam-focused notes.
-
-  Topic: ${topic}
-  Class Level: ${classLevel || "Not specified"}
-  Exam Type: ${examType || "General"}
-  Revision Mode: ${revisionMode ? "ON" : "OFF"}
-  Include Diagram: ${includeDiagram ? "YES" : "NO"}
-  Include Charts: ${includeChart ? "YES" : "NO"}
-
-  GLOBAL CONTENT RULES:
-  - Clear, simple, exam-oriented language
-  - Markdown formatted inside "notes" field (headings and bullets)
-
-  REVISION MODE RULES:
-  - If REVISION MODE is ON:
-    - Notes must be VERY SHORT, bullet points, one-line answers, definitions, formulas.
-    - No paragraphs, no explanations.
-    - revisionPoints MUST summarize all key facts.
-  - If REVISION MODE is OFF:
-    - Detailed exam-focused notes. Max 2-4 lines per paragraph.
-
-  IMPORTANCE RULES:
-  - Divide sub-topics into THREE categories:
-    - "⭐": Very Important Topics
-    - "⭐⭐": Important Topics
-    - "⭐⭐⭐": Frequently Asked Topics
-
-  DIAGRAM RULES:
-  - If INCLUDE DIAGRAM is YES:
-    - diagram.data MUST be a valid Mermaid TD string starting with "graph TD". Wrap labels in square brackets.
-  - If INCLUDE DIAGRAM is NO:
-    - diagram.data MUST be ""
-
-  CHART RULES:
-  - If INCLUDE CHARTS is YES:
-    - charts array MUST contain at least one chart object with type ("bar", "line", or "pie"), title, and data array with objects having "name" and numeric "value".
-  - If INCLUDE CHARTS is NO:
-    - charts MUST be []
-
-  STRICT OUTPUT JSON STRUCTURE (Must match exactly):
-  {
-    "subTopics": {
-      "⭐": [],
-      "⭐⭐": [],
-      "⭐⭐⭐": []
-    },
-    "importance": "⭐",
-    "notes": "string content",
-    "revisionPoints": [],
-    "questions": {
-      "short": [],
-      "long": []
-    },
-    "diagram": {
-      "type": "flowchart",
-      "data": ""
-    },
-    "charts": []
-  }
-  `;
-};

@@ -12,8 +12,10 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFail from "./pages/PaymentFail";
 
 const App = () => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  
+  // function for get current user data
   useEffect(() => {
     getCurrentUser(dispatch);
   }, [dispatch]);
@@ -23,14 +25,14 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={userData ? <Home /> : <Navigate to="/auth" replace/>} />
-        <Route path="/auth" element={userData ? <Navigate to="/" replace/> : <Auth />} />
-        <Route path="/history" element={userData ?<History/> : <Navigate to="/auth" replace/>} />
-        <Route path="/notes" element={userData ? <Notes /> : <Navigate to="/auth" replace/>} />
-        <Route path="/pricing" element={userData ? <Pricing /> : <Navigate to="/auth" replace/>} />
+        <Route path="/" element={userData ? <Home /> : <Navigate to="/auth" replace/>} />  // route for home page
+        <Route path="/auth" element={userData ? <Navigate to="/" replace/> : <Auth />} />   // route for auth or login page
+        <Route path="/history" element={userData ?<History/> : <Navigate to="/auth" replace/>} /> // route for history or your note page
+        <Route path="/notes" element={userData ? <Notes /> : <Navigate to="/auth" replace/>} />  // route for note generate page
+        <Route path="/pricing" element={userData ? <Pricing /> : <Navigate to="/auth" replace/>} />  route for pricing page
 
-        <Route path="/payment-success" element={<PaymentSuccess/>}/>
-        <Route path="/payment-failed" element={<PaymentFail/>}/>
+        <Route path="/payment-success" element={<PaymentSuccess/>}/> //route for payment success page
+        <Route path="/payment-failed" element={<PaymentFail/>}/>  // route for payment fail page
       </Routes>
     </>
   );

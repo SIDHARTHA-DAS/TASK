@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { updateCreadits } from "../redux/userSlice";
 
 const TopicForm = ({setResult, setLoading, loading, setError}) => {
+
+  // all state are here for state management 
   const [topic, setTopic] = useState("")
   const [classLevel, setClassLevel] = useState("")
   const [examType, setExamType] = useState("")
@@ -18,16 +20,19 @@ const TopicForm = ({setResult, setLoading, loading, setError}) => {
   const dispatch = useDispatch()
 
 
+  // function for handle submit request
   const handleSubmit = async () => {
 
     if(!topic.trim()){
-      setError("Please enter the topic")
+      setError("Please enter the topic") //if topic not enter its so error 
       return;
     }
     setError("")
     setLoading(true)
     setResult(null)
       
+
+    // wait for the Ai for generate note 
     try {
       const result =await generateNotes({topic,
         classLevel,
@@ -57,6 +62,8 @@ const TopicForm = ({setResult, setLoading, loading, setError}) => {
     }
   }
 
+
+  //useeffect for showing loading and progressbar 
   useEffect(() => {
     
     if(!loading){
@@ -100,6 +107,8 @@ const TopicForm = ({setResult, setLoading, loading, setError}) => {
       <input onChange={(e)=> setClassLevel(e.target.value)} value={classLevel} type="text" className="w-full p-3 rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-white/30"  placeholder="Class / Level (e.g. Class 10)"/>
       <input onChange={(e)=> setExamType(e.target.value)} value={examType} type="text" className="w-full p-3 rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-white/30"  placeholder="Exam Type (e.g. CBSE, JEE, NEET)"/>
 
+
+        {/* all toggel button */}
       <div className="flex flex-col md:flex-row gap-6">
         <Toggle label="Exam Revision Mode" checked={revisionMode} onChange={()=>setRevisionMode(!revisionMode)}/>
         <Toggle label="Include Diagram" checked={includeDiagram} onChange={()=>setIncludeDiagram(!includeDiagram)}/>
@@ -141,6 +150,8 @@ const TopicForm = ({setResult, setLoading, loading, setError}) => {
 }
 
 
+
+// a smal toggle function components for topic from
 function Toggle({label, checked, onChange}){
   return(
     <div className="flex items-center gap-4 cursor-pointer select-none" onClick={onChange}>

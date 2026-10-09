@@ -5,6 +5,8 @@ import axios from "axios";
 import { serverUrl } from "../App";
 import { setUserData } from "../redux/userSlice";
 
+
+// api for getcurrent user data with credentials 
 export const getCurrentUser = async (dispatch) => {
   try {
     const result = await axios.get(serverUrl + "/api/user/currentuser", {
@@ -17,6 +19,8 @@ export const getCurrentUser = async (dispatch) => {
   }
 };
 
+
+//  api for generateNote for users
 export const generateNotes = async (payload) => {
   try {
     const result = await axios.post(
@@ -33,7 +37,7 @@ export const generateNotes = async (payload) => {
 };
 
 
-
+// api for download PDF from website
 export const downloadPdf = async (result) => {
   try {
     const response = await axios.post(

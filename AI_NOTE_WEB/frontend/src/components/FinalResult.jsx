@@ -4,6 +4,8 @@ import MermaidSetup from "./MermaidSetup";
 import RechartSetUp from "./RechartSetUp";
 import {downloadPdf} from "../services/api"
 
+
+// all markdowcomonents
 const markDownComponent = {
   h1: ({ children }) => (
     <h1 className="text-2xl font-bold text-indigo-700 mt-6 mb-4 border-b pb-2">
@@ -29,6 +31,8 @@ const markDownComponent = {
   li: ({ children }) => <li className="marker:text-indigo-500">{children}</li>,
 };
 
+
+// function for final result show 
 const FinalResult = ({ result }) => {
   const [quickRevision, setQuickRevison] = useState(false);
 
@@ -51,6 +55,7 @@ const FinalResult = ({ result }) => {
         </h2>
 
         <div className="flex gap-3">
+          {/* quickrevision button */}
           <button
             onClick={() => setQuickRevison(!quickRevision)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
@@ -61,6 +66,8 @@ const FinalResult = ({ result }) => {
           >
             {quickRevision ? "Exit Revision Mode" : "Quick Revision (5 min)"}
           </button>
+
+          {/* pdf download button */}
           <button 
            onClick={()=> downloadPdf(result)}
           className="px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer">
@@ -85,7 +92,7 @@ const FinalResult = ({ result }) => {
           ))}
         </section>
       )}
-
+        
       {!quickRevision && (
         <section>
           <SectionHeader icon="📝" title="Detailed Notes" color="purple" />
@@ -96,7 +103,7 @@ const FinalResult = ({ result }) => {
           </div>
         </section>
       )}
-
+      {/* quickrevision button */}
       {quickRevision && (
         <section className="rounded-xl bg-linear-to-r from-green-100 to-green-50 border border-green-200 p-6">
           <h3 className="font-bold text-green-700 mb-3 text-lg">
@@ -109,7 +116,7 @@ const FinalResult = ({ result }) => {
           </ul>
         </section>
       )}
-
+        
       {/* Render Diagram Section Safely */}
       {result.diagram?.data && (
         <section>
@@ -121,7 +128,7 @@ const FinalResult = ({ result }) => {
         </section>
       )}
 
-
+      {/* finall charts show  */}
       {
         result.charts?.length > 0 && 
         <section>
@@ -139,14 +146,14 @@ const FinalResult = ({ result }) => {
 
       <section>
         <SectionHeader icon="❓" title="Important Questions" color="rose" />
-
+        {/* final short question */}
         <p className="font-medium">Short Questions:</p>
         <ul className="list-disc ml-6 text-gray-700">
           {result.questions.short.map((q, i) => (
             <li key={i}>{q}</li>
           ))}
         </ul>
-
+          {/* final long question */}
         <p className="font-medium mt-4">Long Questions:</p>
         <ul className="list-disc ml-6 text-gray-700">
           {result.questions.long.map((q, i) => (
@@ -154,6 +161,8 @@ const FinalResult = ({ result }) => {
           ))}
         </ul>
 
+
+          {/* final diagram question */}
         <p className="font-medium mt-4">Diagram Questions:</p>
         <ul className="list-disc ml-6 text-gray-700">
           {Array.isArray(result.questions?.diagram) ? (
@@ -167,6 +176,8 @@ const FinalResult = ({ result }) => {
   );
 };
 
+
+// small componets for finalresult for all colors icon title
 function SectionHeader({ icon, title, color }) {
   const colors = {
     indigo: "from-indigo-100 to-indigo-50 text-indigo-700",
@@ -174,7 +185,7 @@ function SectionHeader({ icon, title, color }) {
     blue: "from-blue-100 to-blue-50 text-blue-700",
     green: "from-green-100 to-green-50 text-green-700",
     cyan: "from-cyan-100 to-cyan-50 text-cyan-700",
-    rose: "from-rose-100 to-rose-50 text-rose-700", // Fixed typo text-rose-70 -> text-rose-700
+    rose: "from-rose-100 to-rose-50 text-rose-700", 
   };
 
   return (
